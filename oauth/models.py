@@ -252,6 +252,24 @@ class AccessToken(models.Model):
 
     objects = managers.AccessTokenManager()
 
+    def is_valid(self):
+        # validation is:
+        #   1. the token is not expired
+        #   2. the token's application is still active
+
+        # 1. 
+        token_is_expired = self.expiration > timezone.now()
+        if token_is_expired: return False
+
+        # 2. 
+        if not self.application.active: return False
+
+        # if the token passes all checks, return True
+        return True
+
+    # def register_token
+
+
 
 
 

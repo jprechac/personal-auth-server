@@ -134,14 +134,15 @@ REST_FRAMEWORK = {
     "DEFAULT_PARSER_CLASSES": [
         'rest_framework.parsers.JSONParser',
         'rest_framework.parsers.FormParser',
-        'rest_framework.parsers.MultiPartParser'
+        'rest_framework.parsers.MultiPartParser',
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [ # TODO: Create custom Authentication class for Bearer Tokens
         'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication'
+        'oauth.authentication.BearerTokenAuthentication',
     ],
     "DEFAULT_PERMISSION_CLASSES": [
-        'rest_framework.permissions.AllowAny', # TODO: Implement custom permissions for each Application object
+        # 'rest_framework.permissions.AllowAny', # TODO: Implement custom permissions for each Application object
+        'oauth.permissions.ApplicationRegisteredPermission',
     ],
 }
 
